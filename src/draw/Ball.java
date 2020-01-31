@@ -28,7 +28,7 @@ public class Ball {
     }
 
     public void updateBallPosition() {
-        if(padCollision()) {
+        if(thereIsPadCollision()) {
             record++;
             if(hits >= 2) {
                 ballVelocity++;
@@ -61,8 +61,9 @@ public class Ball {
     }
 
     public void score() {
-        System.out.println("Game Over");
-        JOptionPane.showMessageDialog(null,"Your record is " + record + " hits!", "Game Over", JOptionPane.PLAIN_MESSAGE);
+        System.out.println("Game Over\n");
+        JOptionPane.showMessageDialog(null,"Your record is " + record
+                + " hits!", "Game Over", JOptionPane.PLAIN_MESSAGE);
         hits = 0;
         ballXPos = 0;
         ballYPos = 0;
@@ -76,7 +77,7 @@ public class Ball {
         graphics2D.setColor(Color.WHITE);
     }
 
-    public boolean padCollision() {
+    public boolean thereIsPadCollision() {
         return game.pad.getPadBoundaries().intersects(getBallBoundaries());
     }
 
