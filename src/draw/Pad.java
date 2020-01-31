@@ -10,8 +10,8 @@ public class Pad {
 
     private final WallTennis GAME;
     private final int PAD_Y_POS = 520;
-    private final int PAD_WIDTH = 60;
-    private final int PAD_HEIGHT = 10;
+    private final int PAD_WIDTH = 80;
+    private final int PAD_HEIGHT = 13;
 
     private static int padSpeed = 2;
 

@@ -8,7 +8,6 @@ package draw;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class Ball {
     private WallTennis game;
 
@@ -17,11 +16,11 @@ public class Ball {
     private int speedX = 1;
     private int speedY = 1;
     private int hits = 0;
-    private int nbIncreasedPadSpeed = 0;
+    private int nbOfIncreasedPadSpeed = 0;
     private int ballVelocity = 1;
     private int record = 0;
 
-    private final int BALL_SIZE = 20;
+    private final int BALL_SIZE = 17;
 
 
     public Ball(WallTennis game) {
@@ -29,24 +28,23 @@ public class Ball {
     }
 
     public void updateBallPosition() {
-
         if(padCollision()) {
             record++;
-            if(hits >= 3) {
+            if(hits >= 2) {
                 ballVelocity++;
-                nbIncreasedPadSpeed++;
-                if(nbIncreasedPadSpeed % 2 != 0) {
+                nbOfIncreasedPadSpeed++;
+                if(nbOfIncreasedPadSpeed % 2 != 0) {
                     Pad.setPadSpeed(Pad.getPadSpeed() + 1);
-                    System.out.println("nbIncreasedPadSpeed++ " + nbIncreasedPadSpeed);
+                    System.out.println("Increased Pad Speed to: " + nbOfIncreasedPadSpeed);
                 }
                 hits = 0;
-                System.out.println("speed++");
+                System.out.println("Increased Ball Speed to: " + ballVelocity);
 
             } else {
                 ballYPos = game.pad.getPadYPos() - BALL_SIZE;
                 speedY = -ballVelocity;
                 hits++;
-                System.out.println("hit++ " + hits);
+                System.out.println("Hit " + "(" + hits + ")");
             }
         }
 
@@ -63,12 +61,13 @@ public class Ball {
     }
 
     public void score() {
-        JOptionPane.showMessageDialog(null,"Your record is " + record, "Game Over", JOptionPane.PLAIN_MESSAGE);
+        System.out.println("Game Over");
+        JOptionPane.showMessageDialog(null,"Your record is " + record + " hits!", "Game Over", JOptionPane.PLAIN_MESSAGE);
         hits = 0;
         ballXPos = 0;
         ballYPos = 0;
         ballVelocity = 1;
-        Pad.setPadSpeed(1);
+        Pad.setPadSpeed(2);
     }
 
     //draw the ball

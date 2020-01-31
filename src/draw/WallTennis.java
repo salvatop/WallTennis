@@ -12,7 +12,6 @@ public class WallTennis extends JPanel {
 
     Ball ball = new Ball(this);
     Pad pad = new Pad(this);
-    static Image img = Toolkit.getDefaultToolkit().getImage(WallTennis.class.getResource("/assets/bg.png"));
 
     //only needed to assign key listener to pad class
     private WallTennis() {
