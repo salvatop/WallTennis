@@ -16,8 +16,6 @@ public class Pad {
     private static int padSpeed = 2;
 
 
-
-
     public Pad(WallTennis game) {
         this.GAME = game;
     }
@@ -43,7 +41,7 @@ public class Pad {
             padXSpeed = padSpeed;
     }
 
-    public Rectangle getBounds() {
+    public Rectangle getPadBoundaries() {
         return new Rectangle(padXPos, PAD_Y_POS, PAD_WIDTH, PAD_HEIGHT );
     }
 

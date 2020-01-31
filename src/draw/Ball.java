@@ -5,6 +5,7 @@
 
 package draw;
 
+import javax.swing.*;
 import java.awt.*;
 
 
@@ -18,9 +19,10 @@ public class Ball {
     private int hits = 0;
     private int nbIncreasedPadSpeed = 0;
     private int ballVelocity = 1;
+    private int record = 0;
 
     private final int BALL_SIZE = 20;
-    
+
 
     public Ball(WallTennis game) {
         this.game = game;
@@ -29,6 +31,7 @@ public class Ball {
     public void updateBallPosition() {
 
         if(padCollision()) {
+            record++;
             if(hits >= 3) {
                 ballVelocity++;
                 nbIncreasedPadSpeed++;
@@ -60,10 +63,11 @@ public class Ball {
     }
 
     public void score() {
-        System.out.println("goal");
+        JOptionPane.showMessageDialog(null,"Your record is " + record, "Game Over", JOptionPane.PLAIN_MESSAGE);
         hits = 0;
+        ballXPos = 0;
+        ballYPos = 0;
         ballVelocity = 1;
-        
         Pad.setPadSpeed(1);
     }
 
@@ -74,10 +78,10 @@ public class Ball {
     }
 
     public boolean padCollision() {
-        return game.pad.getBounds().intersects(this.getBounds());
+        return game.pad.getPadBoundaries().intersects(getBallBoundaries());
     }
 
-    public Rectangle getBounds() {
+    public Rectangle getBallBoundaries() {
         return new Rectangle(ballXPos, ballYPos, BALL_SIZE, BALL_SIZE);
     }
 }

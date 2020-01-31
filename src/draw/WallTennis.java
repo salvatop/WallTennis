@@ -8,28 +8,23 @@ import javax.swing.*;
 
 public class WallTennis extends JPanel {
 
-    static final WallTennis GAME = new WallTennis();
+    private static final WallTennis GAME = new WallTennis();
+
     Ball ball = new Ball(this);
     Pad pad = new Pad(this);
+    static Image img = Toolkit.getDefaultToolkit().getImage(WallTennis.class.getResource("/assets/bg.png"));
 
+    //only needed to assign key listener to pad class
     private WallTennis() {
         KeyListener listener = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) { }
 
             @Override
-            public void keyTyped(KeyEvent e) {
-            }
+            public void keyPressed(KeyEvent e) { pad.keyPressed(e);}
 
             @Override
-            public void keyPressed(KeyEvent e) {
-                pad.keyPressed(e);
-                //System.out.println("keyPressed=" + KeyEvent.getKeyText(e.getKeyCode()));
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                pad.keyReleased(e);
-                //System.out.println("keyReleased=" + KeyEvent.getKeyText(e.getKeyCode()));
-            }
+            public void keyReleased(KeyEvent e) {pad.keyReleased(e);}
         };
         addKeyListener(listener);
         setFocusable(true);
@@ -49,19 +44,14 @@ public class WallTennis extends JPanel {
         pad.paint(graphics2D);
     }
 
-
-    static void runUI(){
-
+    private static void runUI(){
         JFrame frame = new JFrame("Wall Tennis");
+
         frame.add(GAME);
         frame.setSize(400, 600);
         frame.setBackground(Color.GREEN);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
-
-        //JLabel background = new JLabel(new ImageIcon(WallTennis.class.getResource("/assets/bg.png")));
-        //frame.add(background);
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
