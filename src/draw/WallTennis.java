@@ -3,14 +3,14 @@ package draw;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 
 public class WallTennis extends JPanel {
 
-    public Ball ball = new Ball(this);
-    public Pad pad = new Pad(this);
+    static final WallTennis GAME = new WallTennis();
+    Ball ball = new Ball(this);
+    Pad pad = new Pad(this);
 
     private WallTennis() {
         KeyListener listener = new KeyListener() {
@@ -22,13 +22,13 @@ public class WallTennis extends JPanel {
             @Override
             public void keyPressed(KeyEvent e) {
                 pad.keyPressed(e);
-                System.out.println("keyPressed=" + KeyEvent.getKeyText(e.getKeyCode()));
+                //System.out.println("keyPressed=" + KeyEvent.getKeyText(e.getKeyCode()));
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
                 pad.keyReleased(e);
-                System.out.println("keyReleased=" + KeyEvent.getKeyText(e.getKeyCode()));
+                //System.out.println("keyReleased=" + KeyEvent.getKeyText(e.getKeyCode()));
             }
         };
         addKeyListener(listener);
@@ -40,29 +40,36 @@ public class WallTennis extends JPanel {
         pad.updatePadPosition();
     }
 
-    //@Override
+    @Override
     public void paint(Graphics graphics) {
         super.paint(graphics);
-        Graphics2D graphics2D = (Graphics2D) graphics ;
-        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        Graphics2D graphics2D = (Graphics2D) graphics;
+
         ball.paint(graphics2D);
         pad.paint(graphics2D);
     }
 
-    public static void main(String[] args) throws InterruptedException {
 
-        WallTennis game = new WallTennis();
+    static void runUI(){
 
         JFrame frame = new JFrame("Wall Tennis");
-        frame.add(game);
+        frame.add(GAME);
         frame.setSize(400, 600);
         frame.setBackground(Color.GREEN);
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
 
+        //JLabel background = new JLabel(new ImageIcon(WallTennis.class.getResource("/assets/bg.png")));
+        //frame.add(background);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        runUI();
         while(true) {
-            game.play();
-            game.repaint();
+            GAME.play();
+            GAME.repaint();
             Thread.sleep(10);
         }
     }

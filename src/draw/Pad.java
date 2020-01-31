@@ -7,44 +7,55 @@ public class Pad {
     
     private int padXPos = 0;
     private int padXSpeed = 0;
-    private WallTennis game;
 
-    private final static int padTopY = 520;
-    final static int PAD_WIDTH = 60;
-    final static int PAD_HEIGHT = 10;
+    private final WallTennis GAME;
+    private final int PAD_Y_POS = 520;
+    private final int PAD_WIDTH = 60;
+    private final int PAD_HEIGHT = 10;
 
-    private final int PAD_SPEED = 2;
+    private static int padSpeed = 2;
+
+
+
 
     public Pad(WallTennis game) {
-        this.game = game;
+        this.GAME = game;
     }
 
     public void updatePadPosition() {
-        if (padXPos + padXSpeed > 0 && padXPos + padXSpeed < game.getWidth() - PAD_WIDTH)
+        if (padXPos + padXSpeed > 0 && padXPos + padXSpeed < GAME.getWidth() - PAD_WIDTH) {
             padXPos = padXPos + padXSpeed;
+        }
     }
 
-    public void paint(Graphics2D g) {
-        g.fillRect(padXPos, padTopY, PAD_WIDTH, PAD_HEIGHT);
+    public void paint(Graphics2D graphics2D) {
+        graphics2D.fillRect(padXPos, PAD_Y_POS, PAD_WIDTH, PAD_HEIGHT);
+        graphics2D.setColor(Color.WHITE);
     }
 
-    public void keyReleased(KeyEvent e) {
-        padXSpeed = 0;
-    }
+    public void keyReleased(KeyEvent e) { padXSpeed = 0; }
 
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT)
-            padXSpeed = - PAD_SPEED;
+            padXSpeed = - padSpeed;
 
         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-            padXSpeed = PAD_SPEED;
+            padXSpeed = padSpeed;
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(padXPos, padTopY, PAD_WIDTH, PAD_HEIGHT * 2);
+        return new Rectangle(padXPos, PAD_Y_POS, PAD_WIDTH, PAD_HEIGHT );
     }
 
-    public int getTopY() {
-        return padTopY;
+    public int getPadYPos() {
+        return PAD_Y_POS;
+    }
+
+    public static void setPadSpeed(int speed) {
+        padSpeed = speed;
+    }
+
+    public static int getPadSpeed() {
+        return padSpeed ;
     }
 }
