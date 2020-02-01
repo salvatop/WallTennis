@@ -6,8 +6,7 @@
 * @version 1.0
 * @since   2020-02-01
 
-* A simple tennis survival game that use JFrame to build a UI and KeyListener/KeyEvent from the class JPanel
-* to bind the keyboard keys to pad moves.
+* A simple tennis survival game that use JFrame to build a UI and KeyListener/KeyEvent from the class JPanel to bind the keyboard keys to pad moves.
 
 * Every two round the ball speed increase and so pad does as well but with a slightly different ratio.
 
