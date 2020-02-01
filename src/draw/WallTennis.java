@@ -31,10 +31,7 @@
 
 package draw;
 
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
@@ -76,6 +73,10 @@ public class WallTennis extends JPanel {
         super.paint(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
 
+        RenderingHints hints = new RenderingHints(
+                RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON
+        ); graphics2D.setRenderingHints(hints);
+
         //paint background
         graphics2D.setColor(Color.WHITE);
         graphics2D.fillRect(0, 0, WIDTH, HEIGHT);
@@ -86,6 +87,8 @@ public class WallTennis extends JPanel {
 
         ball.paint(graphics2D);
         pad.paint(graphics2D);
+
+        graphics2D.dispose();
     }
 
     private static void runUI(){
