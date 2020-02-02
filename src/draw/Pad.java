@@ -13,8 +13,7 @@ public class Pad {
     private final int PAD_WIDTH = 80;
     private final int PAD_HEIGHT = 13;
 
-    private static int padSpeed = 2;
-
+    private int padSpeed = 2;
     private int padXPos = 0;
     private int padXSpeed = 0;
 
@@ -52,11 +51,11 @@ public class Pad {
         return PAD_Y_POS;
     }
 
-    public static void setPadSpeed(int speed) {
+    public void setPadSpeed(int speed) {
         padSpeed = speed;
     }
 
-    public static int getPadSpeed() {
+    public int getPadSpeed() {
         return padSpeed ;
     }
 }

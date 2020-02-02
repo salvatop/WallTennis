@@ -31,7 +31,7 @@ public class Ball {
                 ballVelocity++;
                 nbOfIncreasedPadSpeed++;
                 if(nbOfIncreasedPadSpeed % 2 != 0) {
-                    Pad.setPadSpeed(Pad.getPadSpeed() + 1);
+                    GAME.pad.setPadSpeed(GAME.pad.getPadSpeed() + 1);
                     System.out.println("Increased Pad Speed to: " + nbOfIncreasedPadSpeed);
                 }
                 hits = 0;
@@ -102,4 +102,6 @@ public class Ball {
     public int getRecord() {
         return this.record;
     }
+
+    public void setRecord(int record) { this.record = record; }
 }

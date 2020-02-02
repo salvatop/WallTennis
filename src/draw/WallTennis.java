@@ -34,22 +34,22 @@ package draw;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 
 public class WallTennis extends JPanel {
-
-    private final static int WIDTH = 400;
-    private final static int HEIGHT = 600;
-    private final static WallTennis GAME = new WallTennis();
-
     Ball ball = new Ball(this);
     Pad pad = new Pad(this);
 
-    //only needed to assign key listener to pad class
-   private WallTennis() {
-            KeyListener listener = new KeyListener() {
+    private String player;
+
+    private final static WallTennis GAME = new WallTennis();
+    private final static int WIDTH = 400;
+    private final static int HEIGHT = 600;
+
+    private WallTennis() {
+        player = JOptionPane.showInputDialog("Please enter your name: ");
+        KeyListener listener = new KeyListener() {
                 @Override
                 public void keyTyped(KeyEvent e) { }
 
@@ -63,6 +63,10 @@ public class WallTennis extends JPanel {
             setFocusable(true);
     }
 
+    public  String getPlayer() {
+        return player;
+    }
+
     private void play() {
         ball.updateBallPosition();
         pad.updatePadPosition();
@@ -73,9 +77,8 @@ public class WallTennis extends JPanel {
         super.paint(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
 
-        RenderingHints hints = new RenderingHints(
-                RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON
-        ); graphics2D.setRenderingHints(hints);
+        RenderingHints renderingHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        graphics2D.setRenderingHints(renderingHints);
 
         //paint background
         graphics2D.setColor(Color.WHITE);
